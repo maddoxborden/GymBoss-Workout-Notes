@@ -109,9 +109,9 @@
     <!-- B. LIVE CAMPUS MOMENT -->
     <section class="section section-tight" id="campus-moment">
       <div class="stat-banner">
-        <div class="stat-label" id="campus-label">Bama has completed</div>
+        <div class="stat-label" id="campus-label">Gym Boss participants at Alabama have completed</div>
         <div class="stat-number" id="campus-count">—</div>
-        <div class="stat-sub">qualifying Gym Boss activities this season</div>
+        <div class="stat-sub">qualifying activities this season</div>
       </div>
     </section>
 
@@ -223,7 +223,7 @@
       <div class="steps-list">
         <div class="step-item"><div class="step-num"></div><p>Join your dorm above using your existing Gym Boss account.</p></div>
         <div class="step-item"><div class="step-num"></div><p>Complete a qualifying activity in Gym Boss — a real lifting session or a real cardio session both count.</p></div>
-        <div class="step-item"><div class="step-num"></div><p>Show up 15 days out of any rolling 30 to flip your own Freshman 15.</p></div>
+        <div class="step-item"><div class="step-num"></div><p>Complete 15 active days during your 30-day challenge to flip your Freshman 15.</p></div>
         <div class="step-item"><div class="step-num"></div><p>Keep training — every active day still contributes to your dorm's Dorm Cup score, even after you've flipped your own 15.</p></div>
       </div>
     </section>
@@ -246,10 +246,7 @@
   <script type="module">
     import { supabase } from '../assets/supabase-client.js';
 
-    // TODO: point this at the real production Dorm Cup campaign slug before
-    // launch — right now the only campaign in production is the test one
-    // used to validate the scoring backend.
-    const CAMPAIGN_SLUG = 'test-dorm-cup';
+    const CAMPAIGN_SLUG = 'freshman-15-fall-2026';
     const UA_SHORT_CODE = 'ua';
 
     const params = new URLSearchParams(window.location.search);
@@ -280,8 +277,6 @@
         .maybeSingle();
       campaign = camp;
       if (!campaign) return;
-
-      document.getElementById('campus-label').textContent = (organization?.name || 'Campus') + ' has completed';
 
       const [{ data: count }, { data: teamRows }, { data: statRows }, { data: roundRows }] = await Promise.all([
         supabase.rpc('challenge_public_campus_activity_count', { p_campaign_id: campaign.id }),
@@ -331,6 +326,11 @@
 
     function renderRound(rounds) {
       const today = new Date();
+      if (campaign?.starts_at && today < new Date(campaign.starts_at)) {
+        document.getElementById('round-name').textContent = 'Not started yet';
+        document.getElementById('round-time').textContent = 'Dorm Cup scoring begins September 1';
+        return;
+      }
       const current = rounds.find((r) => new Date(r.starts_at) <= today && today <= new Date(r.ends_at));
       if (!current) {
         document.getElementById('round-name').textContent = 'Season standings';
@@ -423,7 +423,7 @@
         sub.textContent = `Don't stop now — every active day still helps ${teamName}.`;
       } else {
         heading.textContent = `${achieved} / ${requiredDays} active days`;
-        sub.textContent = `In your last ${windowDays} days. Keep going.`;
+        sub.textContent = `During your ${windowDays}-day challenge. Keep going.`;
       }
       lifetime.textContent = `Lifetime Dorm Cup contribution: ${lifetimeCount ?? 0} active days.`;
     }
@@ -472,12 +472,10 @@
     document.getElementById('team-submit').addEventListener('click', async () => {
       clearError('team-error');
       const teamId = document.getElementById('team-select').value;
-      // NOTE: sourceParam is captured for attribution but join_challenge_team
-      // does not yet accept/persist it — see the write-up for the smallest
-      // safe backend fix needed before ?source= actually reaches the DB.
       const { error } = await supabase.rpc('join_challenge_team', {
         p_campaign_id: campaign.id,
         p_team_id: teamId,
+        p_join_source: sourceParam,
       });
       if (error) { showError('team-error', error.message || 'Could not join that dorm.'); return; }
       await refreshJoinState();
