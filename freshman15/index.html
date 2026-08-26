@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Flip the Freshman 15 — Gym Boss</title>
+  <meta name="description" content="15 active days. 30 days. Join your dorm and help win the Dorm Cup — a Gym Boss student-led fitness challenge.">
+  <link rel="stylesheet" href="../assets/site.css">
+  <style>
+    .fresh-hero { text-align: center; padding: 72px 0 48px; }
+    .fresh-hero h1 { font-size: clamp(2.4rem, 7vw, 4rem); letter-spacing: -0.01em; }
+    .fresh-hero .flip-line { color: var(--blue); }
+    .fresh-hero p.lede { max-width: 46ch; margin: 20px auto 30px; text-align: center; font-size: 1.1rem; }
+    .fresh-hero .cta-row { justify-content: center; }
+
+    .stat-banner {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 40px 28px;
+      text-align: center;
+    }
+    .stat-banner .stat-label { font-size: 0.8rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-dim); margin-bottom: 10px; }
+    .stat-banner .stat-number { font-family: var(--font-display); font-size: clamp(3rem, 10vw, 5.5rem); color: var(--blue); line-height: 1; }
+    .stat-banner .stat-sub { color: var(--text-faint); font-size: 0.85rem; margin-top: 10px; }
+
+    .board-row {
+      display: grid;
+      grid-template-columns: 40px 1fr auto auto;
+      gap: 14px;
+      align-items: center;
+      padding: 14px 16px;
+      border-radius: var(--radius-sm);
+      background: var(--surface);
+      border: 1px solid var(--border);
+      margin-bottom: 8px;
+    }
+    .board-row .rank { font-family: var(--font-display); font-size: 1.2rem; color: var(--blue); text-align: center; }
+    .board-row .team-name { font-weight: 700; }
+    .board-row .team-meta { font-size: 0.78rem; color: var(--text-faint); }
+    .board-row .points { font-family: var(--font-display); font-size: 1.15rem; color: var(--text); }
+    .board-row.unranked { opacity: 0.7; }
+    .board-row.unranked .rank { color: var(--text-faint); }
+
+    .round-card { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; }
+    .round-card .round-name { font-family: var(--font-display); font-size: 1.4rem; }
+    .round-card .round-time { color: var(--blue); font-weight: 700; }
+
+    .progress-track {
+      height: 10px;
+      border-radius: 999px;
+      background: var(--surface-raised);
+      border: 1px solid var(--border);
+      overflow: hidden;
+      margin: 16px 0;
+    }
+    .progress-fill { height: 100%; background: var(--blue); border-radius: 999px; transition: width 0.4s ease; }
+
+    .steps-list { counter-reset: step; }
+    .steps-list .step-item { display: flex; gap: 16px; margin-bottom: 22px; }
+    .steps-list .step-num {
+      counter-increment: step;
+      width: 34px; height: 34px; flex-shrink: 0;
+      border-radius: 50%; background: var(--blue-soft); color: var(--blue);
+      font-weight: 700; display: flex; align-items: center; justify-content: center;
+    }
+    .steps-list .step-num::before { content: counter(step); }
+
+    .join-panel { max-width: 440px; margin: 0 auto; }
+    .join-panel .field { margin-bottom: 14px; }
+    .join-panel label { display: block; font-size: 0.82rem; font-weight: 700; color: var(--text-dim); margin-bottom: 6px; }
+    .join-panel input, .join-panel select {
+      width: 100%; padding: 12px 14px; border-radius: var(--radius-sm);
+      background: var(--surface-raised); border: 1px solid var(--border); color: var(--text);
+      font-size: 0.95rem; font-family: var(--font-body);
+    }
+    .join-panel input:focus, .join-panel select:focus { outline: none; border-color: var(--blue); }
+    .join-step { display: none; }
+    .join-step.active { display: block; }
+    .form-error { color: var(--danger); font-size: 0.85rem; margin: 10px 0 0; }
+    .form-note { color: var(--text-faint); font-size: 0.82rem; margin-top: 10px; }
+  </style>
+</head>
+<body>
+
+  <header class="site-nav">
+    <nav class="site-nav-inner">
+      <a class="brand" href="/"><span class="brand-badge">GB</span><span class="brand-word">Gym Boss</span></a>
+      <div class="navlinks">
+        <a href="/">Home</a>
+        <a href="#leaderboard">Leaderboard</a>
+        <a href="#join">Join</a>
+      </div>
+    </nav>
+  </header>
+
+  <div class="wrap">
+
+    <!-- A. HERO -->
+    <section class="fresh-hero" id="hero">
+      <h1>FLIP THE<br><span class="flip-line">FRESHMAN 15</span></h1>
+      <p class="lede">15 active days. 30 days. Represent your dorm. Help win the Dorm Cup.</p>
+      <div class="cta-row">
+        <a class="btn btn-primary" href="#join">Join the Challenge</a>
+        <a class="btn btn-secondary" href="https://apps.apple.com/us/app/gym-boss-workout-notes/id6795766855" target="_blank" rel="noopener">Download Gym Boss</a>
+      </div>
+    </section>
+
+    <!-- B. LIVE CAMPUS MOMENT -->
+    <section class="section section-tight" id="campus-moment">
+      <div class="stat-banner">
+        <div class="stat-label" id="campus-label">Bama has completed</div>
+        <div class="stat-number" id="campus-count">—</div>
+        <div class="stat-sub">qualifying Gym Boss activities this season</div>
+      </div>
+    </section>
+
+    <!-- C. LEADERBOARD -->
+    <section class="section" id="leaderboard">
+      <div class="section-head">
+        <span class="eyebrow">Dorm Cup</span>
+        <h2>Standings</h2>
+        <p>Cumulative points across the whole season. Smaller dorms need at least 5 participants before they're ranked publicly.</p>
+      </div>
+      <div id="board-list"><p class="muted">Loading standings…</p></div>
+    </section>
+
+    <!-- D. ROUNDS -->
+    <section class="section section-tight" id="rounds">
+      <div class="card round-card" id="round-card">
+        <div>
+          <div class="eyebrow" style="margin-bottom:6px;">Current Round</div>
+          <div class="round-name" id="round-name">—</div>
+        </div>
+        <div class="round-time" id="round-time">—</div>
+      </div>
+    </section>
+
+    <!-- E. PERSONAL PROGRESS -->
+    <section class="section" id="personal-progress" style="display:none;">
+      <div class="card" style="max-width:480px; margin:0 auto;">
+        <div class="eyebrow">Your Freshman 15</div>
+        <h3 id="personal-heading" style="font-size:1.5rem; margin-bottom:6px;">— / — active days</h3>
+        <div class="progress-track"><div class="progress-fill" id="personal-fill" style="width:0%;"></div></div>
+        <p id="personal-sub" class="muted"></p>
+        <p id="personal-lifetime" class="muted" style="margin-top:10px;"></p>
+      </div>
+    </section>
+
+    <!-- F. JOIN FLOW -->
+    <section class="section" id="join">
+      <div class="section-head center" style="margin:0 auto 40px;">
+        <span class="eyebrow">Join the Challenge</span>
+        <h2>Represent your dorm</h2>
+      </div>
+
+      <div class="join-panel card">
+
+        <!-- Step: sign in -->
+        <div class="join-step" id="step-signin">
+          <p class="muted" style="margin-bottom:16px;">Sign in with your existing Gym Boss account.</p>
+          <div class="field">
+            <label for="signin-email">Email</label>
+            <input id="signin-email" type="email" autocomplete="email" />
+          </div>
+          <div class="field">
+            <label for="signin-password">Password</label>
+            <input id="signin-password" type="password" autocomplete="current-password" />
+          </div>
+          <button class="btn btn-primary btn-block" id="signin-submit">Sign In</button>
+          <p class="form-error hidden" id="signin-error"></p>
+          <p class="form-note">Don't have Gym Boss yet? <a href="https://apps.apple.com/us/app/gym-boss-workout-notes/id6795766855" target="_blank" rel="noopener">Download it</a> and create an account first.</p>
+        </div>
+
+        <!-- Step: verify Crimson email -->
+        <div class="join-step" id="step-verify-request">
+          <p class="muted" style="margin-bottom:16px;">Verify your Crimson student email to confirm eligibility.</p>
+          <div class="field">
+            <label for="crimson-email">Your @crimson.ua.edu email</label>
+            <input id="crimson-email" type="email" placeholder="you@crimson.ua.edu" />
+          </div>
+          <button class="btn btn-primary btn-block" id="verify-request-submit">Send Code</button>
+          <p class="form-error hidden" id="verify-request-error"></p>
+        </div>
+
+        <div class="join-step" id="step-verify-confirm">
+          <p class="muted" style="margin-bottom:16px;">Enter the 6-digit code we emailed you.</p>
+          <div class="field">
+            <label for="verify-code">Verification code</label>
+            <input id="verify-code" inputmode="numeric" maxlength="6" placeholder="123456" />
+          </div>
+          <button class="btn btn-primary btn-block" id="verify-confirm-submit">Verify</button>
+          <p class="form-error hidden" id="verify-confirm-error"></p>
+        </div>
+
+        <!-- Step: choose team -->
+        <div class="join-step" id="step-team">
+          <p class="muted" style="margin-bottom:16px;">Select your dorm.</p>
+          <div class="field">
+            <label for="team-select">Your dorm</label>
+            <select id="team-select"></select>
+          </div>
+          <button class="btn btn-primary btn-block" id="team-submit">Confirm &amp; Join</button>
+          <p class="form-error hidden" id="team-error"></p>
+          <p class="form-note">Once confirmed, your team is locked — changes after that go through support.</p>
+        </div>
+
+        <!-- Step: done -->
+        <div class="join-step" id="step-done">
+          <h3 style="font-size:1.3rem; margin-bottom:8px;">You're in.</h3>
+          <p class="muted" id="done-message"></p>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- G. HOW IT WORKS -->
+    <section class="section section-tight" id="how-it-works">
+      <div class="section-head">
+        <span class="eyebrow">How It Works</span>
+        <h2>Simple, on purpose</h2>
+      </div>
+      <div class="steps-list">
+        <div class="step-item"><div class="step-num"></div><p>Join your dorm above using your existing Gym Boss account.</p></div>
+        <div class="step-item"><div class="step-num"></div><p>Complete a qualifying activity in Gym Boss — a real lifting session or a real cardio session both count.</p></div>
+        <div class="step-item"><div class="step-num"></div><p>Show up 15 days out of any rolling 30 to flip your own Freshman 15.</p></div>
+        <div class="step-item"><div class="step-num"></div><p>Keep training — every active day still contributes to your dorm's Dorm Cup score, even after you've flipped your own 15.</p></div>
+      </div>
+    </section>
+
+    <!-- H. WHY WE'RE DOING IT -->
+    <section class="section section-tight" id="why" style="border-bottom:none;">
+      <div class="section-head">
+        <span class="eyebrow">Why We're Doing This</span>
+        <h2>This isn't a weight-loss competition</h2>
+        <p>Flip the Freshman 15 isn't about the number on a scale — it's about showing up. Fifteen active days in thirty is realistic for a real semester, and every dorm's total is built from real consistency, not a leaderboard of bodies or calories. It's a reason to actually go, a little campus rivalry, and a community that notices when you show up.</p>
+      </div>
+    </section>
+
+  </div>
+
+  <footer class="site-footer">
+    <p>&copy; 2026 Gym Boss. <a href="/#support">Support</a><span class="sep">·</span><a href="/#privacy">Privacy</a><span class="sep">·</span><a href="/#terms">Terms</a></p>
+  </footer>
+
+  <script type="module">
+    import { supabase } from '../assets/supabase-client.js';
+
+    // TODO: point this at the real production Dorm Cup campaign slug before
+    // launch — right now the only campaign in production is the test one
+    // used to validate the scoring backend.
+    const CAMPAIGN_SLUG = 'test-dorm-cup';
+    const UA_SHORT_CODE = 'ua';
+
+    const params = new URLSearchParams(window.location.search);
+    const teamParam = (params.get('team') || '').toLowerCase();
+    const sourceParam = params.get('source') || null;
+
+    function slugify(name) {
+      return name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+    }
+
+    let campaign = null;
+    let organization = null;
+    let teams = [];
+    let session = null;
+
+    async function loadPublicData() {
+      const { data: org } = await supabase
+        .from('challenge_organizations')
+        .select('id, name, short_code')
+        .eq('short_code', UA_SHORT_CODE)
+        .maybeSingle();
+      organization = org;
+
+      const { data: camp } = await supabase
+        .from('challenge_campaigns')
+        .select('id, name, timezone, starts_at, ends_at, personal_window_days, personal_window_required_days')
+        .eq('slug', CAMPAIGN_SLUG)
+        .maybeSingle();
+      campaign = camp;
+      if (!campaign) return;
+
+      document.getElementById('campus-label').textContent = (organization?.name || 'Campus') + ' has completed';
+
+      const [{ data: count }, { data: teamRows }, { data: statRows }, { data: roundRows }] = await Promise.all([
+        supabase.rpc('challenge_public_campus_activity_count', { p_campaign_id: campaign.id }),
+        supabase.from('challenge_teams').select('id, name').eq('campaign_id', campaign.id).order('name'),
+        supabase.from('challenge_public_team_stats').select('*').eq('campaign_id', campaign.id).eq('round_number', 0),
+        supabase.from('challenge_campaign_rounds').select('*').eq('campaign_id', campaign.id).order('round_number'),
+      ]);
+
+      document.getElementById('campus-count').textContent = (count ?? 0).toLocaleString();
+      teams = teamRows || [];
+      renderLeaderboard(statRows || [], teams);
+      renderRound(roundRows || []);
+      populateTeamSelect(teams);
+    }
+
+    function renderLeaderboard(stats, teamList) {
+      const nameById = new Map(teamList.map((t) => [t.id, t.name]));
+      const rows = stats
+        .map((s) => ({ ...s, name: nameById.get(s.team_id) || 'Unnamed dorm' }))
+        .sort((a, b) => (a.rank ?? 999) - (b.rank ?? 999) || b.participant_count - a.participant_count);
+
+      const el = document.getElementById('board-list');
+      if (!rows.length) {
+        el.innerHTML = '<p class="muted">No dorms have joined yet — be the first.</p>';
+        return;
+      }
+
+      el.innerHTML = rows.map((row) => {
+        if (row.tier === 'unranked') {
+          return `<div class="board-row unranked">
+            <div class="rank">–</div>
+            <div><div class="team-name">${row.name}</div><div class="team-meta">${row.participant_count}/5 participants needed to be ranked</div></div>
+            <div></div><div></div>
+          </div>`;
+        }
+        const fuller = row.tier === 'ranked_full' && row.avg_credits_per_participant != null
+          ? `${row.avg_credits_per_participant} avg / participant`
+          : `${row.participant_count} participants`;
+        return `<div class="board-row">
+          <div class="rank">${row.rank}</div>
+          <div><div class="team-name">${row.name}</div><div class="team-meta">${fuller}</div></div>
+          <div class="points">${row.total_points ?? 0}</div>
+          <div class="team-meta">points</div>
+        </div>`;
+      }).join('');
+    }
+
+    function renderRound(rounds) {
+      const today = new Date();
+      const current = rounds.find((r) => new Date(r.starts_at) <= today && today <= new Date(r.ends_at));
+      if (!current) {
+        document.getElementById('round-name').textContent = 'Season standings';
+        document.getElementById('round-time').textContent = 'Cumulative — never resets';
+        return;
+      }
+      const daysLeft = Math.max(0, Math.ceil((new Date(current.ends_at) - today) / 86400000));
+      document.getElementById('round-name').textContent = `Round ${current.round_number}`;
+      document.getElementById('round-time').textContent = `${daysLeft} day${daysLeft === 1 ? '' : 's'} left`;
+    }
+
+    function populateTeamSelect(teamList) {
+      const select = document.getElementById('team-select');
+      select.innerHTML = teamList.map((t) => `<option value="${t.id}">${t.name}</option>`).join('');
+      if (teamParam) {
+        const match = teamList.find((t) => slugify(t.name) === teamParam);
+        if (match) select.value = match.id;
+      }
+    }
+
+    // --- Join flow state machine ------------------------------------------
+
+    const steps = ['signin', 'verify-request', 'verify-confirm', 'team', 'done'];
+    function showStep(name) {
+      steps.forEach((s) => document.getElementById(`step-${s}`).classList.toggle('active', s === name));
+    }
+    function showError(id, message) {
+      const el = document.getElementById(id);
+      el.textContent = message;
+      el.classList.remove('hidden');
+    }
+    function clearError(id) {
+      document.getElementById(id).classList.add('hidden');
+    }
+
+    async function refreshJoinState() {
+      const { data: { session: current } } = await supabase.auth.getSession();
+      session = current;
+
+      if (!session) { showStep('signin'); return; }
+      if (!organization || !campaign) return;
+
+      const { data: affiliation } = await supabase
+        .from('challenge_affiliations')
+        .select('id')
+        .eq('organization_id', organization.id)
+        .maybeSingle();
+
+      if (!affiliation) { showStep('verify-request'); return; }
+
+      const { data: participant } = await supabase
+        .from('challenge_participants')
+        .select('id, team_id, team_locked_at')
+        .eq('campaign_id', campaign.id)
+        .maybeSingle();
+
+      if (!participant || !participant.team_locked_at) { showStep('team'); return; }
+
+      const teamName = (teams.find((t) => t.id === participant.team_id) || {}).name || 'your dorm';
+      document.getElementById('done-message').textContent = `You're locked in with ${teamName}.`;
+      showStep('done');
+      await showPersonalProgress(participant.id, teamName);
+    }
+
+    async function showPersonalProgress(participantId, teamName) {
+      const windowDays = campaign.personal_window_days ?? 30;
+      const requiredDays = campaign.personal_window_required_days ?? 15;
+      const cutoff = new Date(Date.now() - windowDays * 86400000).toISOString().slice(0, 10);
+
+      const [{ count: windowCount }, { count: lifetimeCount }] = await Promise.all([
+        supabase.from('challenge_daily_credits').select('id', { count: 'exact', head: true })
+          .eq('participant_id', participantId).eq('credit_type', 'personal_15').eq('is_valid', true)
+          .gte('campaign_local_day', cutoff),
+        supabase.from('challenge_daily_credits').select('id', { count: 'exact', head: true })
+          .eq('participant_id', participantId).eq('credit_type', 'dorm_cup').eq('is_valid', true),
+      ]);
+
+      const section = document.getElementById('personal-progress');
+      section.style.display = '';
+      const heading = document.getElementById('personal-heading');
+      const fill = document.getElementById('personal-fill');
+      const sub = document.getElementById('personal-sub');
+      const lifetime = document.getElementById('personal-lifetime');
+
+      const achieved = windowCount ?? 0;
+      fill.style.width = `${Math.min(100, (achieved / requiredDays) * 100)}%`;
+
+      if (achieved >= requiredDays) {
+        heading.textContent = 'You flipped the Freshman 15';
+        sub.textContent = `Don't stop now — every active day still helps ${teamName}.`;
+      } else {
+        heading.textContent = `${achieved} / ${requiredDays} active days`;
+        sub.textContent = `In your last ${windowDays} days. Keep going.`;
+      }
+      lifetime.textContent = `Lifetime Dorm Cup contribution: ${lifetimeCount ?? 0} active days.`;
+    }
+
+    document.getElementById('signin-submit').addEventListener('click', async () => {
+      clearError('signin-error');
+      const email = document.getElementById('signin-email').value.trim();
+      const password = document.getElementById('signin-password').value;
+      const { error } = await supabase.auth.signInWithPassword({ email, password });
+      if (error) { showError('signin-error', 'Sign-in failed — check your email and password.'); return; }
+      await refreshJoinState();
+    });
+
+    document.getElementById('verify-request-submit').addEventListener('click', async () => {
+      clearError('verify-request-error');
+      const email = document.getElementById('crimson-email').value.trim();
+      if (!email.toLowerCase().endsWith('@crimson.ua.edu')) {
+        showError('verify-request-error', 'Enter your @crimson.ua.edu email.');
+        return;
+      }
+      const { data: { session: current } } = await supabase.auth.getSession();
+      const resp = await fetch(`${supabase.functions.url ?? 'https://qragkvnzfddmahujgzix.supabase.co/functions/v1'}/challenge-request-verification`, {
+        method: 'POST',
+        headers: { Authorization: `Bearer ${current.access_token}`, 'Content-Type': 'application/json' },
+        body: JSON.stringify({ organization_id: organization.id, email }),
+      });
+      const body = await resp.json();
+      if (!resp.ok) { showError('verify-request-error', body.error || 'Could not send a code.'); return; }
+      showStep('verify-confirm');
+    });
+
+    document.getElementById('verify-confirm-submit').addEventListener('click', async () => {
+      clearError('verify-confirm-error');
+      const code = document.getElementById('verify-code').value.trim();
+      const { data: { session: current } } = await supabase.auth.getSession();
+      const resp = await fetch(`https://qragkvnzfddmahujgzix.supabase.co/functions/v1/challenge-verify-code`, {
+        method: 'POST',
+        headers: { Authorization: `Bearer ${current.access_token}`, 'Content-Type': 'application/json' },
+        body: JSON.stringify({ organization_id: organization.id, code }),
+      });
+      const body = await resp.json();
+      if (!resp.ok || !body.verified) { showError('verify-confirm-error', 'That code didn\'t match. Try again.'); return; }
+      await refreshJoinState();
+    });
+
+    document.getElementById('team-submit').addEventListener('click', async () => {
+      clearError('team-error');
+      const teamId = document.getElementById('team-select').value;
+      // NOTE: sourceParam is captured for attribution but join_challenge_team
+      // does not yet accept/persist it — see the write-up for the smallest
+      // safe backend fix needed before ?source= actually reaches the DB.
+      const { error } = await supabase.rpc('join_challenge_team', {
+        p_campaign_id: campaign.id,
+        p_team_id: teamId,
+      });
+      if (error) { showError('team-error', error.message || 'Could not join that dorm.'); return; }
+      await refreshJoinState();
+    });
+
+    supabase.auth.onAuthStateChange(() => { refreshJoinState(); });
+
+    loadPublicData().then(refreshJoinState);
+  </script>
+
+</body>
+</html>

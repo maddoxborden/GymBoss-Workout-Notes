@@ -1,0 +1,452 @@
+/* Gym Boss — shared site design system.
+   Tokens match the live app's actual theme (constants/gym-boss-theme.ts). */
+
+:root {
+  --bg: #0c1014;
+  --surface: #14191e;
+  --surface-raised: #1b2129;
+  --border: #232b33;
+  --text: #f2f5f8;
+  --text-dim: #93a0ac;
+  --text-faint: #5f6a75;
+  --blue: #72a7ea;
+  --blue-strong: #2668c7;
+  --blue-soft: rgba(114, 167, 234, 0.14);
+  --danger: #e2695f;
+
+  --font-display: Georgia, 'Iowan Old Style', 'Times New Roman', serif;
+  --font-body: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+
+  --wrap: 1120px;
+  --radius: 14px;
+  --radius-sm: 9px;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-body);
+  font-size: 17px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  line-height: 1.12;
+  margin: 0;
+  text-wrap: balance;
+}
+
+p { margin: 0; color: var(--text-dim); }
+
+a { color: var(--blue); text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+img, svg { max-width: 100%; display: block; }
+
+.wrap {
+  max-width: var(--wrap);
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* --- Nav ------------------------------------------------------------ */
+
+header.site-nav {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  background: rgba(12, 16, 20, 0.86);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--border);
+}
+
+nav.site-nav-inner {
+  max-width: var(--wrap);
+  margin: 0 auto;
+  padding: 16px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+/* Matches the real in-app wordmark: a white "GB" badge beside "Gym Boss"
+   set in the app's own Georgia display face — not a generic caps lockup. */
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--text);
+}
+.brand:hover { text-decoration: none; }
+.brand-badge {
+  width: 32px;
+  height: 32px;
+  border-radius: 9px;
+  background: #f2f5f8;
+  color: #05070a;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-body);
+  font-weight: 800;
+  font-size: 0.72rem;
+  letter-spacing: 0.02em;
+  flex-shrink: 0;
+}
+.brand-word {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.28rem;
+  letter-spacing: 0;
+}
+
+.navlinks {
+  display: flex;
+  gap: 22px;
+  flex-wrap: wrap;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+.navlinks a { color: var(--text-dim); }
+.navlinks a:hover { color: var(--text); text-decoration: none; }
+
+/* --- Buttons ---------------------------------------------------------- */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 13px 22px;
+  border-radius: 999px;
+  font-weight: 700;
+  font-size: 0.95rem;
+  border: 1px solid transparent;
+  cursor: pointer;
+  white-space: nowrap;
+}
+.btn:hover { text-decoration: none; }
+
+.btn-primary {
+  background: var(--blue);
+  color: #05070a;
+}
+.btn-primary:hover { background: #86b6ee; }
+
+.btn-secondary {
+  background: transparent;
+  color: var(--text);
+  border-color: var(--border);
+}
+.btn-secondary:hover { border-color: var(--blue); color: var(--blue); }
+
+.btn-block { width: 100%; }
+.btn[disabled] { opacity: 0.5; cursor: not-allowed; }
+
+/* --- Sections ---------------------------------------------------------- */
+
+.section {
+  padding: 96px 0;
+  border-bottom: 1px solid var(--border);
+}
+.section:last-of-type { border-bottom: none; }
+.section-tight { padding: 64px 0; }
+/* ~27% less than .section's 96px — used where content-to-content rhythm
+   was reading as too much dead air between sections. */
+.section-snug { padding: 70px 0; }
+
+.eyebrow {
+  display: inline-block;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--blue);
+  margin-bottom: 14px;
+}
+
+.section-head {
+  max-width: 640px;
+  margin-bottom: 48px;
+}
+.section-head h2 { font-size: clamp(1.8rem, 3.4vw, 2.6rem); margin-bottom: 14px; }
+.section-head p { font-size: 1.08rem; line-height: 1.6; }
+
+.split {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 64px;
+  align-items: center;
+}
+.split.reverse .split-media { order: 2; }
+
+@media (max-width: 860px) {
+  .split, .split.reverse .split-media { grid-template-columns: 1fr; order: initial; }
+  .split { gap: 40px; }
+}
+
+/* --- Card / device mockup shell ---------------------------------------- */
+
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 28px;
+}
+
+.phone-frame {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 32px;
+  padding: 14px;
+  box-shadow: 0 30px 80px -30px rgba(0, 0, 0, 0.6);
+  max-width: 320px;
+  margin: 0 auto;
+}
+.phone-screen {
+  background: var(--bg);
+  border-radius: 22px;
+  overflow: hidden;
+  padding: 18px 16px;
+  min-height: 420px;
+}
+/* Real device screenshots — never force both width and height. The mask
+   reserves space at the screenshot's own native ratio (avoids layout shift);
+   the image itself only ever sets width, letting height follow naturally. */
+.device-frame {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 30px;
+  padding: 10px;
+  box-shadow: 0 30px 80px -30px rgba(0, 0, 0, 0.6);
+  max-width: 280px;
+  margin: 0 auto;
+}
+.hero .device-frame {
+  max-width: 210px;
+}
+.device-frame .screen-mask {
+  border-radius: 22px;
+  overflow: hidden;
+  aspect-ratio: 1242 / 2688;
+}
+.real-app-screen {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: contain;
+}
+
+/* One deliberate, disclosed exception: the Next Workout screenshot itself
+   has a stray note fragment and a lot of dead space above/below the actual
+   card. This crops to just that card — object-fit: cover still preserves
+   the image's real aspect ratio and only ever crops, it never stretches
+   (unlike object-fit: fill). Every other real screenshot stays uncropped. */
+.screen-mask.crop-window {
+  aspect-ratio: auto;
+}
+.screen-mask.crop-window .real-app-screen {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Small supporting thumbnails (Progress back/analytics, secondary
+   nutrition shot) — same no-distortion rule, just smaller and paired. */
+.device-frame.thumb {
+  max-width: 128px;
+  padding: 6px;
+}
+.device-frame.thumb .screen-mask {
+  border-radius: 14px;
+}
+.thumb-row {
+  display: flex;
+  gap: 14px;
+  justify-content: center;
+  margin-top: 18px;
+}
+.thumb-caption {
+  text-align: center;
+  font-size: 0.72rem;
+  color: var(--text-faint);
+  margin-top: 8px;
+}
+
+/* Premium's single restrained real-UI crop: the actual "Past conversations"
+   row from the Ask Gym Boss screenshot, showing a real Premium-gated
+   feature rather than an invented mockup. */
+.premium-crop {
+  max-width: 360px;
+  margin: 28px auto 0;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+.premium-crop .crop-mask {
+  aspect-ratio: 1206 / 250;
+  overflow: hidden;
+}
+.premium-crop .crop-mask img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 41%;
+  display: block;
+}
+
+.phone-screen .screen-title {
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+.phone-screen .screen-sub {
+  font-size: 0.78rem;
+  color: var(--text-faint);
+  margin-bottom: 18px;
+}
+
+.mock-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--surface-raised);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 12px 14px;
+  margin-bottom: 10px;
+}
+.mock-row .mock-name { font-size: 0.88rem; font-weight: 700; color: var(--text); }
+.mock-row .mock-meta { font-size: 0.72rem; color: var(--text-faint); margin-top: 2px; }
+.mock-row .mock-value { font-size: 0.95rem; font-weight: 700; color: var(--blue); }
+
+.mock-chip {
+  display: inline-block;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--blue);
+  background: var(--blue-soft);
+  border-radius: 999px;
+  padding: 4px 9px;
+  margin-bottom: 10px;
+}
+
+.mock-bubble {
+  border-radius: 16px;
+  padding: 12px 14px;
+  font-size: 0.86rem;
+  line-height: 1.45;
+  margin-bottom: 10px;
+  max-width: 88%;
+}
+.mock-bubble.user {
+  background: var(--blue-soft);
+  color: var(--text);
+  margin-left: auto;
+}
+.mock-bubble.assistant {
+  background: var(--surface-raised);
+  border: 1px solid var(--border);
+  color: var(--text-dim);
+}
+
+/* --- Feature grid -------------------------------------------------------- */
+
+.grid-3 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+@media (max-width: 860px) { .grid-3 { grid-template-columns: 1fr; } }
+
+.feature-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 26px;
+}
+.feature-card h3 { font-size: 1.05rem; margin-bottom: 8px; }
+.feature-card p { font-size: 0.92rem; }
+
+/* --- Hero ---------------------------------------------------------------- */
+
+.hero {
+  padding: 80px 0 64px;
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 56px;
+  align-items: center;
+}
+@media (max-width: 900px) { .hero { grid-template-columns: 1fr; padding: 56px 0 40px; } }
+
+.hero h1 {
+  font-size: clamp(2.6rem, 6vw, 4.4rem);
+  letter-spacing: -0.01em;
+}
+.hero .lede {
+  font-size: 1.15rem;
+  max-width: 46ch;
+  margin: 20px 0 30px;
+  line-height: 1.6;
+}
+.hero .cta-row { display: flex; gap: 14px; flex-wrap: wrap; }
+
+/* --- Legal sections (preserved content, restyled) ------------------------- */
+
+.legal-section h2 { font-size: 1.9rem; color: var(--text); margin-bottom: 6px; }
+.legal-updated {
+  color: var(--text-faint);
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin: 0 0 32px;
+}
+.legal-section h3 {
+  font-family: var(--font-body);
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  text-transform: uppercase;
+  color: var(--text);
+  border-left: 3px solid var(--blue);
+  padding-left: 12px;
+  margin: 32px 0 10px;
+}
+.legal-section h3:first-of-type { margin-top: 0; }
+.legal-section p { margin: 0 0 14px; font-size: 0.95rem; }
+.legal-section p:last-child { margin-bottom: 0; }
+
+/* --- Footer ---------------------------------------------------------------- */
+
+footer.site-footer {
+  padding: 40px 0 60px;
+  text-align: center;
+  color: var(--text-faint);
+  font-size: 0.85rem;
+}
+footer.site-footer a { color: var(--text-faint); }
+footer.site-footer a:hover { color: var(--blue); }
+footer.site-footer .sep { margin: 0 10px; color: var(--border); }
+
+/* --- Utility --------------------------------------------------------------- */
+
+.center { text-align: center; }
+.hidden { display: none !important; }
+.stack { display: flex; flex-direction: column; gap: 10px; }
+.muted { color: var(--text-faint); font-size: 0.85rem; }
+
+@media (prefers-reduced-motion: reduce) {
+  * { animation-duration: 0.001ms !important; transition-duration: 0.001ms !important; }
+}

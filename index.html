@@ -3,183 +3,19 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Gym Boss — Workout, Cardio &amp; Nutrition Tracking</title>
-  <meta name="description" content="Gym Boss is a mobile companion for tracking lifts, cardio routes, and nutrition, with AI trainer support. Privacy policy, terms of service, and support for Gym Boss.">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <style>
-    :root {
-      --ink: #eae6dd;
-      --ink-dim: #a7a196;
-      --ground: #131211;
-      --ground-raised: #1a1917;
-      --line: #2c2a26;
-      --flame: #ff5a1f;
-      --flame-dim: #b8431a;
-    }
-
-    * { box-sizing: border-box; }
-
-    html { scroll-behavior: smooth; }
-
-    body {
-      margin: 0;
-      background: var(--ground);
-      color: var(--ink);
-      font-family: 'Work Sans', -apple-system, BlinkMacSystemFont, sans-serif;
-      font-size: 17px;
-      line-height: 1.7;
-    }
-
-    h1, h2, h3 {
-      font-family: 'Bebas Neue', 'Work Sans', sans-serif;
-      font-weight: 400;
-      letter-spacing: 0.04em;
-      color: var(--ink);
-      line-height: 1.1;
-    }
-
-    a { color: var(--flame); text-decoration: none; }
-    a:hover { text-decoration: underline; }
-
-    .wrap {
-      max-width: 720px;
-      margin: 0 auto;
-      padding: 0 24px;
-    }
-
-    header.top {
-      border-bottom: 1px solid var(--line);
-      position: sticky;
-      top: 0;
-      background: rgba(19, 18, 17, 0.92);
-      backdrop-filter: blur(6px);
-      z-index: 10;
-    }
-
-    nav.top {
-      max-width: 720px;
-      margin: 0 auto;
-      padding: 18px 24px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 16px;
-    }
-
-    .brand {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 1.4rem;
-      letter-spacing: 0.08em;
-      color: var(--ink);
-      text-decoration: none;
-      white-space: nowrap;
-    }
-    .brand:hover { text-decoration: none; }
-    .brand span { color: var(--flame); }
-
-    .navlinks {
-      display: flex;
-      gap: 18px;
-      flex-wrap: wrap;
-      font-size: 0.85rem;
-      text-transform: uppercase;
-      letter-spacing: 0.06em;
-    }
-    .navlinks a { color: var(--ink-dim); }
-    .navlinks a:hover { color: var(--flame); text-decoration: none; }
-
-    .hero {
-      padding: 72px 0 56px;
-      border-bottom: 1px solid var(--line);
-    }
-
-    .hero h1 {
-      font-size: 4rem;
-      margin: 0 0 6px;
-    }
-
-    .hero .tagline {
-      font-size: 1.15rem;
-      color: var(--ink-dim);
-      max-width: 46ch;
-      margin: 0 0 4px;
-    }
-
-    .hero .avail {
-      display: inline-block;
-      margin-top: 18px;
-      font-size: 0.8rem;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      color: var(--flame);
-      border: 1px solid var(--flame-dim);
-      padding: 6px 12px;
-      border-radius: 2px;
-    }
-
-    section {
-      padding: 56px 0;
-      border-bottom: 1px solid var(--line);
-    }
-    section:last-of-type { border-bottom: none; }
-
-    section h2 {
-      font-size: 2.1rem;
-      color: var(--flame);
-      margin: 0 0 6px;
-    }
-
-    .updated {
-      color: var(--ink-dim);
-      font-size: 0.85rem;
-      text-transform: uppercase;
-      letter-spacing: 0.06em;
-      margin: 0 0 32px;
-    }
-
-    section h3 {
-      font-size: 1.15rem;
-      letter-spacing: 0.02em;
-      text-transform: uppercase;
-      color: var(--ink);
-      border-left: 3px solid var(--flame);
-      padding-left: 12px;
-      margin: 36px 0 10px;
-    }
-
-    section h3:first-of-type { margin-top: 0; }
-
-    section p { color: var(--ink-dim); margin: 0 0 14px; }
-    section p:last-child { margin-bottom: 0; }
-    section p a { color: var(--flame); }
-
-    footer {
-      padding: 40px 0 60px;
-      text-align: center;
-      color: var(--ink-dim);
-      font-size: 0.85rem;
-    }
-    footer a { color: var(--ink-dim); }
-    footer a:hover { color: var(--flame); }
-    footer .sep { margin: 0 10px; color: var(--line); }
-
-    @media (max-width: 560px) {
-      .hero h1 { font-size: 3rem; }
-      nav.top { flex-direction: column; align-items: flex-start; gap: 10px; }
-    }
-  </style>
+  <title>Gym Boss — Your Training, Your Way</title>
+  <meta name="description" content="Gym Boss combines the flexibility of workout notes with the intelligence of a real training system — progression, AI coaching, nutrition, and cardio tracking in one app.">
+  <link rel="stylesheet" href="assets/site.css">
 </head>
 <body>
 
-  <header class="top">
-    <nav class="top">
-      <a class="brand" href="#home">GYM <span>BOSS</span></a>
+  <header class="site-nav">
+    <nav class="site-nav-inner">
+      <a class="brand" href="#home"><span class="brand-badge">GB</span><span class="brand-word">Gym Boss</span></a>
       <div class="navlinks">
+        <a href="/freshman15/">Flip the Freshman 15</a>
         <a href="#privacy">Privacy</a>
         <a href="#terms">Terms</a>
-        <a href="#ai">AI Usage</a>
         <a href="#support">Support</a>
       </div>
     </nav>
@@ -187,15 +23,190 @@
 
   <div class="wrap">
 
-    <section class="hero" id="home" style="padding-top:56px;">
-      <h1>Gym Boss</h1>
-      <p class="tagline">Your mobile companion for tracking lifts, cardio routes, and nutrition — with AI trainers keeping you on pace.</p>
-      <span class="avail">Available now on iOS and Android</span>
+    <!-- 1. HERO -->
+    <section class="hero" id="home">
+      <div>
+        <h1>Your training.<br>Your way.</h1>
+        <p class="lede">Gym Boss combines the flexibility of workout notes with the intelligence of a real training system — progression, AI coaching, nutrition, and cardio tracking, all in one place.</p>
+        <div class="cta-row">
+          <a class="btn btn-primary" href="https://apps.apple.com/us/app/gym-boss-workout-notes/id6795766855" target="_blank" rel="noopener">Download on the App Store</a>
+          <a class="btn btn-secondary" href="/freshman15/">Flip the Freshman 15 →</a>
+        </div>
+      </div>
+      <div class="device-frame">
+        <div class="screen-mask">
+          <img class="real-app-screen" src="assets/screenshots/today.png" alt="Gym Boss Today screen — weigh-in, food log, and this week's training at a glance" loading="eager">
+        </div>
+      </div>
     </section>
 
-    <section id="privacy">
+    <!-- 2. WORKOUT NOTES -->
+    <section class="section section-snug" id="notes">
+      <div class="split">
+        <div>
+          <span class="eyebrow">Workout Notes</span>
+          <h2>Train your way, on notes you'll actually use</h2>
+          <p>Log a workout exactly the way you'd write it down — your own shorthand, your own order, free-form text. Gym Boss reads it and turns it into structured sets, reps, and weight, without forcing you into a rigid form first.</p>
+        </div>
+        <div class="device-frame split-media">
+          <div class="screen-mask" style="aspect-ratio: 1206 / 2622;">
+            <img class="real-app-screen" src="assets/screenshots/workout-notes.png" alt="A real Gym Boss workout note, typed freeform and ready to start" loading="lazy">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. NEXT WORKOUT -->
+    <section class="section section-snug" id="next-workout">
+      <div class="split reverse">
+        <div>
+          <span class="eyebrow">Next Workout</span>
+          <h2>Gym Boss remembers your training so you don't have to</h2>
+          <p>Every confirmed set becomes part of your history. Gym Boss tracks what you lifted, when, and how it went, then tells you what to target next — a rep, a few more pounds, or simply repeat what worked. No spreadsheet, no guessing.</p>
+        </div>
+        <div class="device-frame split-media">
+          <!-- Cropped to just the Next Workout card — the full screenshot has
+               a stray note fragment and a lot of dead space above/below it.
+               object-fit: cover only crops here, it never stretches. -->
+          <div class="screen-mask crop-window" style="aspect-ratio: 1242 / 1450;">
+            <img class="real-app-screen" src="assets/screenshots/next-workout.png" alt="Gym Boss Next Workout card showing a targeted weight and rep recommendation" style="object-position: center 44%;" loading="lazy">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. ASK GYM BOSS -->
+    <section class="section section-snug" id="ask-gym-boss">
+      <div class="split">
+        <div>
+          <span class="eyebrow">Ask Gym Boss</span>
+          <h2>A coach that already knows your training</h2>
+          <p>Ask a real question and get an answer that already accounts for your history — no re-explaining your split, your goals, or last week's session every time. Gym Boss's AI coaching reads your actual training data, not a blank chat window.</p>
+        </div>
+        <div class="device-frame split-media">
+          <div class="screen-mask" style="aspect-ratio: 1206 / 2622;">
+            <img class="real-app-screen" src="assets/screenshots/ask-gym-boss.png" alt="Ask Gym Boss chat generating a real upper-body workout from a real conversation" loading="lazy">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. PROGRESS -->
+    <section class="section section-snug" id="progress">
+      <div class="split reverse">
+        <div>
+          <span class="eyebrow">Progress</span>
+          <h2>See your training take shape</h2>
+          <p>A visual map of every muscle group you've trained, strength trends over time, and the numbers that show real progress — not just a log of what happened.</p>
+        </div>
+        <div class="split-media">
+          <div class="device-frame">
+            <div class="screen-mask" style="aspect-ratio: 1242 / 2688;">
+              <img class="real-app-screen" src="assets/screenshots/progress.png" alt="Gym Boss Progress screen showing the front strength body map" loading="lazy">
+            </div>
+          </div>
+          <div class="thumb-row">
+            <div>
+              <div class="device-frame thumb">
+                <div class="screen-mask" style="aspect-ratio: 1206 / 2622;">
+                  <img class="real-app-screen" src="assets/screenshots/progress-back.png" alt="Gym Boss Progress screen showing the back strength body map" loading="lazy">
+                </div>
+              </div>
+              <div class="thumb-caption">Back</div>
+            </div>
+            <div>
+              <div class="device-frame thumb">
+                <div class="screen-mask" style="aspect-ratio: 1206 / 2622;">
+                  <img class="real-app-screen" src="assets/screenshots/progress-analytics.png" alt="Gym Boss Progress trend graph across sessions" loading="lazy">
+                </div>
+              </div>
+              <div class="thumb-caption">Trends</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6. NUTRITION -->
+    <section class="section" id="nutrition">
+      <div class="split">
+        <div>
+          <span class="eyebrow">Nutrition</span>
+          <h2>Macros without the manual math</h2>
+          <p>Write what you ate in plain language or scan a barcode — Gym Boss estimates calories and macros and keeps a running picture of your day against your own daily targets.</p>
+        </div>
+        <div class="split-media">
+          <div class="device-frame">
+            <div class="screen-mask" style="aspect-ratio: 1206 / 2622;">
+              <img class="real-app-screen" src="assets/screenshots/nutrition-main.png" alt="Gym Boss daily nutrition targets and today's logged food" loading="lazy">
+            </div>
+          </div>
+          <div class="thumb-row" style="justify-content:center;">
+            <div>
+              <div class="device-frame thumb">
+                <div class="screen-mask" style="aspect-ratio: 1206 / 2622;">
+                  <img class="real-app-screen" src="assets/screenshots/nutrition-secondary.png" alt="Gym Boss food notebook with barcode scanning" loading="lazy">
+                </div>
+              </div>
+              <div class="thumb-caption">Barcode &amp; food notebook</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 7. CARDIO -->
+    <section class="section" id="cardio">
+      <div class="split reverse">
+        <div>
+          <span class="eyebrow">Cardio</span>
+          <h2>Every run and ride, tracked</h2>
+          <p>Live GPS tracking for outdoor runs and walks, or log treadmill and indoor sessions manually — distance, pace, and calories, alongside your lifts.</p>
+        </div>
+        <div class="device-frame split-media">
+          <div class="screen-mask" style="aspect-ratio: 1206 / 2622;">
+            <img class="real-app-screen" src="assets/screenshots/cardio.png" alt="Gym Boss cardio activity history with a real GPS route" loading="lazy">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 8. RECAPS -->
+    <section class="section-tight center" id="recaps" style="border-bottom: 1px solid var(--border);">
+      <span class="eyebrow">Training Intelligence</span>
+      <h2 style="font-size:clamp(1.6rem,3vw,2.1rem); max-width:34ch; margin:0 auto 12px;">Weeks of training, turned into a clear recap</h2>
+      <p style="max-width:50ch; margin:0 auto; font-size:1rem;">What's trending, what's been consistent, and where real progress is happening — summarized automatically, not buried in a log.</p>
+    </section>
+
+    <!-- 9. PREMIUM -->
+    <section class="section" id="premium">
+      <div class="section-head center" style="margin:0 auto 48px;">
+        <span class="eyebrow">Premium</span>
+        <h2>Free records it. Premium understands it.</h2>
+        <p>Every Gym Boss account tracks workouts, cardio, and nutrition. Premium adds personalized next-session targets built from your real training history, AI coaching that remembers your goals across sessions, and deeper, research-backed answers to training questions.</p>
+      </div>
+      <div class="premium-crop">
+        <div class="crop-mask">
+          <img src="assets/screenshots/ask-gym-boss.png" alt="Real Gym Boss Premium feature — saved past conversations in Ask Gym Boss" loading="lazy">
+        </div>
+      </div>
+      <div class="center" style="margin-top:24px;">
+        <a class="btn btn-secondary" href="https://apps.apple.com/us/app/gym-boss-workout-notes/id6795766855" target="_blank" rel="noopener">See plans in the app</a>
+      </div>
+    </section>
+
+    <!-- 10. FINAL CTA -->
+    <section class="section section-tight center">
+      <h2 style="font-size:clamp(1.8rem,4vw,2.6rem); margin-bottom:16px;">Your training. Your way.</h2>
+      <p style="max-width:44ch; margin:0 auto 28px; font-size:1.05rem;">Download Gym Boss and start training with a system that actually knows what you did.</p>
+      <a class="btn btn-primary" href="https://apps.apple.com/us/app/gym-boss-workout-notes/id6795766855" target="_blank" rel="noopener">Download on the App Store</a>
+    </section>
+
+    <!-- ============ LEGAL (content unchanged, anchors preserved) ============ -->
+
+    <section class="section legal-section" id="privacy">
       <h2>Privacy Policy</h2>
-      <p class="updated">Last updated: August 6, 2026</p>
+      <p class="legal-updated">Last updated: August 6, 2026</p>
 
       <h3>Camera Access and Usage</h3>
       <p>We may request access or permission to certain features from your mobile device, specifically your device's camera. This access is strictly used to allow you to scan food barcodes to retrieve nutritional information. We do not capture, record, or transmit photos or videos from your camera to our servers or any third parties.</p>
@@ -224,9 +235,9 @@
       <p>Contact for privacy questions: <a href="mailto:support@gymbossnotes.com">support@gymbossnotes.com</a></p>
     </section>
 
-    <section id="terms">
+    <section class="section legal-section" id="terms">
       <h2>Terms of Service</h2>
-      <p class="updated">Last updated: August 6, 2026</p>
+      <p class="legal-updated">Last updated: August 6, 2026</p>
 
       <h3>Using Gym Boss</h3>
       <p>Gym Boss is a personal fitness, nutrition, and cardio tracking app. You must be able to form a binding contract to use it, and you're responsible for keeping your account credentials secure. You agree not to misuse the app — including attempting to access another user's data, disrupting the service, or using it for any unlawful purpose.</p>
@@ -254,9 +265,9 @@
       <p>Questions about these Terms: <a href="mailto:support@gymbossnotes.com">support@gymbossnotes.com</a></p>
     </section>
 
-    <section id="ai">
+    <section class="section legal-section" id="ai">
       <h2>AI Usage</h2>
-      <p class="updated">Last updated: August 6, 2026</p>
+      <p class="legal-updated">Last updated: August 6, 2026</p>
 
       <p>Gym Boss uses artificial intelligence (currently OpenAI models) to generate workout analysis, next-session recommendations, nutrition coaching, and macro/calorie estimates from the notes you enter. This content is generated automatically and is not reviewed by a human before you see it.</p>
 
@@ -267,15 +278,15 @@
       <p>Questions about how we use AI: <a href="mailto:support@gymbossnotes.com">support@gymbossnotes.com</a></p>
     </section>
 
-    <section id="support">
+    <section class="section legal-section" id="support" style="border-bottom:none;">
       <h2>Support</h2>
-      <p>Need help with Gym Boss, experiencing a bug, or want to request a feature? We're here to help.</p>
-      <p>Email us directly at: <a href="mailto:support@gymbossnotes.com">support@gymbossnotes.com</a></p>
+      <p style="margin-top:14px;">Need help with Gym Boss, experiencing a bug, or want to request a feature? We're here to help.</p>
+      <p style="margin-top:10px;">Email us directly at: <a href="mailto:support@gymbossnotes.com">support@gymbossnotes.com</a></p>
     </section>
 
   </div>
 
-  <footer>
+  <footer class="site-footer">
     <p>&copy; 2026 Gym Boss. All rights reserved.
       <span class="sep">·</span><a href="https://instagram.com" target="_blank" rel="noopener">Instagram</a>
       <span class="sep">·</span><a href="https://tiktok.com" target="_blank" rel="noopener">TikTok</a>
