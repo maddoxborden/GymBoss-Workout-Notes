@@ -206,10 +206,17 @@
 
     <section class="section legal-section" id="privacy">
       <h2>Privacy Policy</h2>
-      <p class="legal-updated">Last updated: August 6, 2026</p>
+      <p class="legal-updated">Last updated: September 6, 2026</p>
 
-      <h3>Camera Access and Usage</h3>
-      <p>We may request access or permission to certain features from your mobile device, specifically your device's camera. This access is strictly used to allow you to scan food barcodes to retrieve nutritional information. We do not capture, record, or transmit photos or videos from your camera to our servers or any third parties.</p>
+      <h3>Camera and Photo Access</h3>
+      <p>We may request access to your device's camera and photo library. Camera access is used to scan food barcodes and, if you choose, to photograph a meal for a Premium photo estimate. Photo library access is used only for images you explicitly select, such as a meal photo or a shareable cardio route card. We never browse, scan, or upload your photo library in the background — only the specific images you choose in the moment.</p>
+
+      <h3>Meal Photo Estimates</h3>
+      <p>Photo estimates are a Premium feature you start deliberately. When you take or select a meal photo and request an estimate, that image is sent from your device to our servers and then on to our AI provider, OpenAI, which analyzes it and returns an estimated list of foods with calories and macros.</p>
+
+      <p>We do not store the photo itself. The image is passed through for analysis and is not written to any photo storage, and it is never attached to your workout logs, food history, or profile. What we do keep is the text estimate that comes back, held for up to 24 hours so you can review and edit it before saving. If you don't save it, it is deleted. We also keep a small technical record of each request — a timestamp, a status, and a one-way fingerprint of the image — so that a retry can't double-charge you or produce a duplicate entry. That fingerprint cannot be turned back into your photo.</p>
+
+      <p>Under OpenAI's API terms, content sent through the API is not used to train its models. OpenAI may retain API request data for a limited period for abuse monitoring under its own policies, so we cannot promise that your photo is discarded the instant it is analyzed. If you would rather no image ever leave your device, simply don't use photo estimates — every nutrition feature in Gym Boss remains available through barcode scanning, search, and text entry.</p>
 
       <h3>Geolocation and Background Location</h3>
       <p>We may request access or permission to track location-based information from your mobile device, either continuously (in the background) or while you are actively using the application. This data is specifically collected to track your cardio routes, distance, and pace, even when your device is locked or the app is minimized.</p>
@@ -218,7 +225,7 @@
       <p>To provide our core features, we collect information you voluntarily provide, including account details, workout logs, and nutrition history. You may permanently delete your account and all associated personal data at any time directly within the application's settings menu.</p>
 
       <h3>AI Processing</h3>
-      <p>When you use "Ask Gym Boss" or get a nutrition estimate, the text of your workout notes, food notes, or questions is sent to our AI provider, OpenAI, to generate a response. We do not send your email address, precise identity, or payment information to OpenAI. See <a href="#ai">AI Usage</a> for more detail.</p>
+      <p>When you use "Ask Gym Boss" or get a nutrition estimate, the text of your workout notes, food notes, or questions is sent to our AI provider, OpenAI, to generate a response. If you request a meal photo estimate, the photo you selected is sent as well. We do not send your email address, precise identity, or payment information to OpenAI. See <a href="#ai">AI Usage</a> for more detail.</p>
 
       <h3>Crash Diagnostics and Error Reporting</h3>
       <p>Gym Boss uses Sentry, a crash and error reporting service, to help us detect and fix app crashes and errors. Crash reports may include device and app state information at the time of the crash, but are not linked to your name, email address, or account identity, and are never used for advertising or tracking.</p>
@@ -244,7 +251,7 @@
 
     <section class="section legal-section" id="terms">
       <h2>Terms of Service</h2>
-      <p class="legal-updated">Last updated: August 6, 2026</p>
+      <p class="legal-updated">Last updated: September 6, 2026</p>
 
       <h3>Using Gym Boss</h3>
       <p>Gym Boss is a personal fitness, nutrition, and cardio tracking app. You must be able to form a binding contract to use it, and you're responsible for keeping your account credentials secure. You agree not to misuse the app — including attempting to access another user's data, disrupting the service, or using it for any unlawful purpose.</p>
@@ -255,7 +262,7 @@
       <p>Gym Boss Premium is an auto-renewing subscription billed through the Apple App Store or Google Play. It renews automatically at the end of each billing period unless you cancel at least 24 hours before renewal, through your Apple ID or Google Play account settings — we cannot cancel or refund a subscription on your behalf. Pricing and duration (monthly or annual) are shown before purchase.</p>
 
       <h3>Your Content</h3>
-      <p>You own the workout notes, food entries, and other content you create in Gym Boss. You grant us the limited right to store and process that content in order to provide the app's features, including sending relevant text to our AI provider as described in our Privacy Policy and AI Usage page.</p>
+      <p>You own the workout notes, food entries, and other content you create in Gym Boss. You grant us the limited right to store and process that content in order to provide the app's features, including sending relevant text — and, for photo estimates, a meal photo you choose to submit — to our AI provider as described in our Privacy Policy and AI Usage page.</p>
 
       <h3>Disclaimer</h3>
       <p>Gym Boss, including anything generated by its AI features, provides general fitness and nutrition information for informational purposes only. It is not medical, dietary, or professional advice, and does not create a doctor-patient, dietitian-patient, or trainer-client relationship. Consult a qualified professional before making significant changes to your training, diet, or health routine, especially if you have an injury, a medical condition, or are pregnant.</p>
@@ -274,13 +281,15 @@
 
     <section class="section legal-section" id="ai">
       <h2>AI Usage</h2>
-      <p class="legal-updated">Last updated: August 6, 2026</p>
+      <p class="legal-updated">Last updated: September 6, 2026</p>
 
-      <p>Gym Boss uses artificial intelligence (currently OpenAI models) to generate workout analysis, next-session recommendations, nutrition coaching, and macro/calorie estimates from the notes you enter. This content is generated automatically and is not reviewed by a human before you see it.</p>
+      <p>Gym Boss uses artificial intelligence (currently OpenAI models) to generate workout analysis, next-session recommendations, nutrition coaching, and macro/calorie estimates from the notes you enter or, for Premium photo estimates, from a meal photo you choose to submit. This content is generated automatically and is not reviewed by a human before you see it.</p>
+
+      <p>Photo estimates are a best guess from a single image. A model cannot see what is underneath the food, weigh a portion, or know how something was cooked, so calories and macros from a photo should be treated as a rough starting point that you review and correct — not a measurement. Always check the estimate before saving it.</p>
 
       <p>AI-generated estimates and suggestions are provided for general informational and educational purposes only. They may be inaccurate or incomplete, and do not constitute medical, dietary, or professional fitness advice. Do not disregard or delay seeking professional medical advice because of anything generated by Gym Boss. If you notice pain, dizziness, chest pain, or any concerning symptom, stop the activity and seek appropriate medical help.</p>
 
-      <p>When you use "Ask Gym Boss" or request a nutrition estimate, the relevant text you've entered is sent to OpenAI to generate a response. We do not send your email address, precise identity, or payment information as part of that request.</p>
+      <p>When you use "Ask Gym Boss" or request a nutrition estimate, the relevant text you've entered is sent to OpenAI to generate a response. When you request a meal photo estimate, the photo you selected is sent to OpenAI as well. We do not send your email address, precise identity, or payment information as part of that request. We do not store the photo itself; see <a href="#privacy">Meal Photo Estimates</a> in our Privacy Policy for exactly what is and isn't kept.</p>
 
       <p>Questions about how we use AI: <a href="mailto:support@gymbossnotes.com">support@gymbossnotes.com</a></p>
     </section>
